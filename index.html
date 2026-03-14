@@ -276,6 +276,27 @@
     .btn-dl:active { transform: translateY(0); }
     .btn-dl svg { width: 18px; height: 18px; flex-shrink: 0; }
 
+    .btn-hub {
+      display: inline-flex; align-items: center; gap: 0.65rem;
+      background: transparent;
+      border: 1px solid rgba(0,210,255,0.35);
+      color: var(--accent);
+      font-family: var(--font-head);
+      font-size: 1.05rem;
+      font-weight: 700;
+      padding: 0.9rem 2.2rem;
+      border-radius: var(--radius);
+      cursor: pointer; text-decoration: none;
+      transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+    }
+    .btn-hub svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .btn-hub:hover {
+      background: rgba(0,210,255,0.08);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,210,255,0.15);
+      text-decoration: none;
+    }
+
     .version-tag {
       font-family: var(--font-mono);
       font-size: 0.75rem;
@@ -640,6 +661,13 @@
             </svg>
             Download Velocity Executor
           </button>
+          <a href="scripts.html" class="btn-hub" aria-label="Browse scripts and executors">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <polyline points="16 18 22 12 16 6"/>
+              <polyline points="8 6 2 12 8 18"/>
+            </svg>
+            Get Scripts &amp; Free Executors
+          </a>
           <p class="version-tag">
             <span class="badge">LATEST</span> v0.8.4 · Windows 10 / 11 · 12,752 KB
           </p>
