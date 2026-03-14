@@ -122,6 +122,37 @@
     }
     .hero-sub { color: var(--muted); font-size: 1rem; margin-bottom: 2rem; }
 
+    /* Search mode tabs */
+    .search-tabs {
+      display: inline-flex;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 3px;
+      margin-bottom: 1rem;
+    }
+    .search-tab {
+      display: flex; align-items: center; gap: 0.4rem;
+      padding: 0.35rem 1rem;
+      border-radius: 999px; border: none;
+      font-family: var(--font-body); font-size: 0.82rem; font-weight: 500;
+      color: var(--muted); background: transparent;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .search-tab svg { width: 13px; height: 13px; }
+    .search-tab.active { background: rgba(0,210,255,0.12); color: var(--accent); }
+    .search-tab:hover:not(.active) { color: var(--text); }
+
+    /* Google hint */
+    .google-hint {
+      display: none;
+      font-size: 0.8rem; color: var(--muted);
+      margin-top: -0.5rem; margin-bottom: 1rem;
+    }
+    .google-hint.visible { display: block; }
+    .google-hint strong { color: var(--text); }
+
     /* Search bar */
     .search-wrap {
       display: flex; gap: 0.5rem;
@@ -520,6 +551,18 @@
         <h1>Script <em>Hub</em></h1>
         <p class="hero-sub">Search thousands of free Roblox scripts — copy and execute instantly with Velocity.</p>
 
+        <!-- Search mode tabs -->
+        <div class="search-tabs">
+          <button class="search-tab active" data-mode="scriptblox">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            ScriptBlox
+          </button>
+          <button class="search-tab" data-mode="google">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            Google
+          </button>
+        </div>
+
         <!-- Search -->
         <div class="search-wrap" role="search">
           <input
@@ -535,8 +578,8 @@
           </button>
         </div>
 
-        <!-- Filters -->
-        <div class="filters" role="group" aria-label="Filters">
+        <!-- Filters (ScriptBlox only) -->
+        <div class="filters" id="sbFilters" role="group" aria-label="Filters">
           <button class="filter-btn active" data-filter="all">All</button>
           <button class="filter-btn" data-filter="free">Free</button>
           <button class="filter-btn" data-filter="verified">Verified</button>
@@ -544,6 +587,12 @@
           <button class="filter-btn" data-filter="newest">Newest</button>
           <button class="filter-btn" data-filter="mostviewed">Most Viewed</button>
         </div>
+
+        <!-- Google hint (hidden by default) -->
+        <p class="google-hint" id="googleHint">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="width:14px;height:14px;display:inline;vertical-align:middle;margin-right:4px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Searches Google for <strong>Roblox scripts</strong> matching your query — opens results in a new tab.
+        </p>
       </section>
 
       <!-- Results meta -->
@@ -785,12 +834,54 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    // ─── Search mode ─────────────────────────────────────────
+    let searchMode = 'scriptblox';
+    const sbFilters   = document.getElementById('sbFilters');
+    const googleHint  = document.getElementById('googleHint');
+
+    document.querySelectorAll('.search-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        searchMode = tab.dataset.mode;
+
+        if (searchMode === 'google') {
+          sbFilters.style.display  = 'none';
+          googleHint.classList.add('visible');
+          searchInput.placeholder  = 'Search Google for Roblox scripts...';
+          container.innerHTML      = `
+            <div class="state-msg">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              <h3>Google Script Search</h3>
+              <p>Type a game or script name and hit Search — results open in Google in a new tab.</p>
+            </div>`;
+          pagination.hidden = true;
+          meta.hidden       = true;
+        } else {
+          sbFilters.style.display  = '';
+          googleHint.classList.remove('visible');
+          searchInput.placeholder  = 'Search scripts, games...';
+          state.query = ''; state.page = 1;
+          fetchScripts();
+        }
+      });
+    });
+
     // ─── Events ───────────────────────────────────────────────
     const searchInput = document.getElementById('searchInput');
     const searchBtn   = document.getElementById('searchBtn');
 
     function doSearch() {
-      state.query = searchInput.value.trim();
+      const q = searchInput.value.trim();
+      if (searchMode === 'google') {
+        if (!q) return;
+        const googleQ = encodeURIComponent(`Roblox script ${q} pastebin OR github`);
+        window.open(`https://www.google.com/search?q=${googleQ}`, '_blank', 'noopener,noreferrer');
+        return;
+      }
+      state.query = q;
       state.page  = 1;
       fetchScripts();
     }
@@ -870,7 +961,7 @@
         <div class="exec-card">
           <div class="exec-header">
             <div class="exec-title-wrap">
-              <div class="exec-icon" style="background:linear-gradient(135deg,#00d2ff,#0099bb)">V</div>
+              <div class="exec-icon" style="background:none;padding:0;overflow:hidden"><img src="https://ltnproject.github.io/velocity/velocity-logo.webp" alt="Velocity logo" style="width:100%;height:100%;object-fit:cover;border-radius:10px"></div>
               <div>
                 <div class="exec-name">Velocity Executor</div>
                 <div class="exec-sys">Windows 10 &amp; 11 · Free &amp; Keyless</div>
