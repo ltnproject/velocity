@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delta Executor – Download for Windows, iOS & Android</title>
+  <meta name="description" content="Download Delta Executor for all platforms — Windows, Android, and iOS. Free executor with universal game support.">
+  <link rel="canonical" href="https://ltnproject.github.io/velocity/delta.html">
+  <link rel="icon" type="image/png" href="https://ltnproject.github.io/velocity/velocity-logo.webp">
+
+  <meta name="google-site-verification" content="j69qEnsCK9CFCL6aT0iwjMvGjZFRaHMaMDIzOFhb88o">
+  <meta name="msvalidate.01" content="F8C0A8F2823688B7B26915A6F2196720">
+
+  <meta property="og:title" content="Delta Executor – Download for All Platforms">
+  <meta property="og:description" content="Download Delta Executor free for Windows, Android and iOS.">
+  <meta property="og:image" content="https://ltnproject.github.io/velocity/delta.png">
+  <meta property="og:url" content="https://ltnproject.github.io/velocity/delta.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:        #080b10;
+      --surface:   #0e1420;
+      --surface2:  #131b2a;
+      --border:    rgba(0,210,255,0.12);
+      --accent:    #00d2ff;
+      --accent2:   #7b2fff;
+      --text:      #e2eaf5;
+      --muted:     #6b7d96;
+      --success:   #00e5a0;
+      --warn:      #ffb830;
+      --danger:    #ff4d6d;
+
+      --font-head: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      --radius:    10px;
+      --radius-lg: 18px;
+      --glow:      0 0 24px rgba(0,210,255,0.18);
+      --shadow:    0 8px 32px rgba(0,0,0,0.5);
+      --max-w:     860px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* Background */
+    .bg-canvas {
+      position: fixed; inset: 0; z-index: -1;
+      background:
+        radial-gradient(ellipse 60% 40% at 10% 0%, rgba(123,47,255,0.09) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 90% 100%, rgba(0,210,255,0.07) 0%, transparent 70%),
+        var(--bg);
+    }
+    .bg-canvas::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.018)' stroke-width='1'%3E%3Cpath d='M0 20h40M20 0v40'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 1.5rem; }
+
+    /* Header */
+    header {
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(8,11,16,0.7);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.9rem 1.5rem;
+      max-width: var(--max-w); margin: 0 auto;
+    }
+    .header-brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+    .header-brand img { width: 32px; height: 32px; border-radius: 8px; }
+    .header-brand span {
+      font-family: var(--font-head);
+      font-size: 1.05rem; font-weight: 800;
+      color: #fff; letter-spacing: -0.02em;
+    }
+    .header-brand span em { font-style: normal; color: var(--accent); }
+    .header-nav { display: flex; gap: 1.25rem; }
+    .header-nav a {
+      font-size: 0.85rem; color: var(--muted);
+      text-decoration: none; transition: color 0.15s;
+    }
+    .header-nav a:hover, .header-nav a.active { color: var(--accent); }
+
+    /* Hero */
+    .hero {
+      padding: 4rem 0 2.5rem;
+      text-align: center;
+    }
+    .hero-logo {
+      width: 90px; height: 90px;
+      border-radius: 22px;
+      margin: 0 auto 1.5rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--glow);
+      object-fit: cover;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(123,47,255,0.1);
+      border: 1px solid rgba(123,47,255,0.25);
+      border-radius: 999px;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.78rem; font-family: var(--font-mono);
+      color: #a87fff; letter-spacing: 0.05em;
+      text-transform: uppercase; margin-bottom: 1.25rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 7px; height: 7px;
+      background: #a87fff;
+      border-radius: 50%;
+      animation: pulse-dot 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.4; transform: scale(0.7); }
+    }
+    h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800; letter-spacing: -0.03em;
+      color: #fff; margin-bottom: 0.75rem; line-height: 1.1;
+    }
+    h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--accent2), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub { color: var(--muted); font-size: 1rem; max-width: 500px; margin: 0 auto 0.75rem; }
+    .hero-version {
+      font-family: var(--font-mono);
+      font-size: 0.78rem; color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+    .hero-version span {
+      background: var(--success);
+      color: #000; font-weight: 700;
+      padding: 2px 7px; border-radius: 5px;
+      font-size: 0.65rem; margin-right: 0.4rem;
+    }
+
+    /* Platform cards */
+    .platforms {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+    .platform-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem 1.5rem;
+      display: flex; flex-direction: column;
+      align-items: center; text-align: center;
+      gap: 1rem;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .platform-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+    }
+    .platform-card.windows::before { background: linear-gradient(90deg, #00d2ff, #0078d4); }
+    .platform-card.android::before { background: linear-gradient(90deg, #00e5a0, #00b86e); }
+    .platform-card.ios::before     { background: linear-gradient(90deg, #a87fff, #7b2fff); }
+
+    .platform-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+    .platform-card.windows:hover { border-color: rgba(0,210,255,0.35); }
+    .platform-card.android:hover { border-color: rgba(0,229,160,0.35); }
+    .platform-card.ios:hover     { border-color: rgba(168,127,255,0.35); }
+
+    .platform-icon {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .platform-icon svg { width: 28px; height: 28px; }
+    .windows .platform-icon { background: rgba(0,210,255,0.1);  }
+    .windows .platform-icon svg { stroke: var(--accent); }
+    .android .platform-icon { background: rgba(0,229,160,0.1);  }
+    .android .platform-icon svg { stroke: var(--success); }
+    .ios     .platform-icon { background: rgba(168,127,255,0.1); }
+    .ios     .platform-icon svg { stroke: #a87fff; }
+
+    .platform-name {
+      font-family: var(--font-head);
+      font-size: 1.15rem; font-weight: 800;
+      color: #fff;
+    }
+    .platform-meta {
+      font-family: var(--font-mono);
+      font-size: 0.75rem; color: var(--muted);
+      display: flex; flex-direction: column; gap: 0.2rem;
+    }
+
+    .btn-platform {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      width: 100%;
+      justify-content: center;
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius);
+      font-family: var(--font-head);
+      font-size: 0.9rem; font-weight: 700;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .btn-platform:hover { opacity: 0.9; transform: translateY(-1px); text-decoration: none; }
+    .btn-platform svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    .windows .btn-platform { background: linear-gradient(135deg, #00d2ff, #0078d4); color: #fff; }
+    .android .btn-platform { background: linear-gradient(135deg, #00e5a0, #00966b); color: #000; }
+    .ios     .btn-platform { background: linear-gradient(135deg, #a87fff, #7b2fff); color: #fff; }
+
+    .loading-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .spinner {
+      width: 24px; height: 24px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Divider */
+    .divider { height: 1px; background: var(--border); margin: 0 0 3rem; }
+
+    /* Info section */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem; margin-bottom: 3rem;
+    }
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+    }
+    .info-card-title {
+      font-family: var(--font-mono);
+      font-size: 0.7rem; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .info-card-value {
+      font-family: var(--font-head);
+      font-size: 1rem; font-weight: 800; color: #fff;
+    }
+
+    /* Install steps */
+    section h2 {
+      font-family: var(--font-head);
+      font-size: 1.4rem; font-weight: 800;
+      color: #fff; letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+    .section-lead { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+    .tab-row {
+      display: flex; gap: 0.5rem; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0;
+    }
+    .tab-btn {
+      padding: 0.5rem 1.1rem;
+      border: none; background: none;
+      font-family: var(--font-body); font-size: 0.85rem; font-weight: 500;
+      color: var(--muted); cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px; transition: all 0.15s;
+    }
+    .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .tab-btn:hover:not(.active) { color: var(--text); }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .steps { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.65rem; }
+    .step {
+      display: flex; gap: 1rem; align-items: flex-start;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.9rem 1.1rem;
+    }
+    .step-num {
+      flex-shrink: 0; width: 28px; height: 28px;
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-head); font-size: 0.8rem; font-weight: 800; color: #fff;
+    }
+    .windows-steps .step-num { background: linear-gradient(135deg, #00d2ff, #0078d4); }
+    .android-steps .step-num { background: linear-gradient(135deg, #00e5a0, #00966b); }
+    .ios-steps     .step-num { background: linear-gradient(135deg, #a87fff, #7b2fff); }
+    .step-body { font-size: 0.88rem; color: var(--text); }
+    .step-body strong { color: #fff; }
+
+    .note {
+      margin-top: 1rem;
+      background: rgba(255,184,48,0.06);
+      border: 1px solid rgba(255,184,48,0.2);
+      border-left: 3px solid var(--warn);
+      border-radius: var(--radius);
+      padding: 0.9rem 1.1rem;
+      font-size: 0.85rem; color: var(--muted);
+      display: flex; gap: 0.65rem;
+    }
+    .note svg { flex-shrink: 0; width: 16px; height: 16px; stroke: var(--warn); margin-top: 3px; }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.75rem 0; margin-top: 3rem;
+    }
+    .footer-inner {
+      display: flex; flex-wrap: wrap;
+      align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .footer-brand { display: flex; align-items: center; gap: 0.6rem; }
+    .footer-brand img { width: 26px; height: 26px; border-radius: 6px; }
+    .footer-brand span { font-family: var(--font-head); font-weight: 800; font-size: 0.9rem; color: #fff; }
+    .footer-nav { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .footer-nav a { font-size: 0.82rem; color: var(--muted); text-decoration: none; }
+    .footer-nav a:hover { color: var(--accent); }
+    .disclaimer {
+      margin-top: 1.25rem;
+      font-size: 0.78rem; color: var(--muted);
+      padding: 0.65rem 1rem;
+      background: rgba(255,77,109,0.05);
+      border: 1px solid rgba(255,77,109,0.15);
+      border-radius: var(--radius);
+    }
+
+    @media (max-width: 600px) {
+      .header-nav { display: none; }
+      .platforms { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-canvas" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="header-brand">
+        <img src="https://ltnproject.github.io/velocity/velocity-logo.webp" alt="Velocity logo" width="32" height="32">
+        <span>Velocity <em>Executor</em></span>
+      </a>
+      <nav class="header-nav" aria-label="Site navigation">
+        <a href="index.html">Home</a>
+        <a href="scripts.html">Script Hub</a>
+        <a href="delta.html" class="active">Delta</a>
+        <a href="index.html#faq">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <!-- Hero -->
+      <section class="hero">
+        <img src="https://ltnproject.github.io/velocity/delta.png" alt="Delta Executor logo" class="hero-logo">
+        <p class="hero-eyebrow">All Platforms Supported</p>
+        <h1>Delta <em>Executor</em></h1>
+        <p class="hero-sub">Free Roblox executor available on Windows, Android and iOS. One tool, every platform.</p>
+        <p class="hero-version" id="heroVersion">
+          <span>LATEST</span> Loading…
+        </p>
+      </section>
+
+      <!-- Platform download cards -->
+      <div class="platforms" id="platformCards">
+        <div class="loading-card"><div class="spinner"></div></div>
+        <div class="loading-card"><div class="spinner"></div></div>
+        <div class="loading-card"><div class="spinner"></div></div>
+      </div>
+
+      <!-- Info bar -->
+      <div class="info-grid" id="infoGrid"></div>
+
+      <div class="divider"></div>
+
+      <!-- Install guide -->
+      <section id="install" aria-labelledby="install-heading">
+        <h2 id="install-heading">Installation Guide</h2>
+        <p class="section-lead">Follow the steps for your platform below.</p>
+
+        <div class="tab-row" role="tablist">
+          <button class="tab-btn active" role="tab" data-tab="windows" aria-selected="true">🖥 Windows</button>
+          <button class="tab-btn" role="tab" data-tab="android" aria-selected="false">🤖 Android</button>
+          <button class="tab-btn" role="tab" data-tab="ios" aria-selected="false">🍎 iOS</button>
+        </div>
+
+        <!-- Windows steps -->
+        <div class="tab-panel active" id="tab-windows" role="tabpanel">
+          <ol class="steps windows-steps">
+            <li class="step"><span class="step-num">1</span><div class="step-body"><strong>Download</strong> — Click the Windows button above to download the BlueStacks installer (<code>.exe</code>).</div></li>
+            <li class="step"><span class="step-num">2</span><div class="step-body"><strong>Install BlueStacks</strong> — Run the installer and follow the on-screen setup wizard.</div></li>
+            <li class="step"><span class="step-num">3</span><div class="step-body"><strong>Sign in to Google</strong> — Open BlueStacks and sign into your Google account to access the Play Store.</div></li>
+            <li class="step"><span class="step-num">4</span><div class="step-body"><strong>Install Roblox</strong> — Search for Roblox in the Play Store and install it inside BlueStacks.</div></li>
+            <li class="step"><span class="step-num">5</span><div class="step-body"><strong>Download Delta APK</strong> — Also grab the Android APK above and drag it into the BlueStacks window to install.</div></li>
+            <li class="step"><span class="step-num">6</span><div class="step-body"><strong>Inject &amp; Execute</strong> — Open Roblox in BlueStacks, launch Delta, inject, and run your script.</div></li>
+          </ol>
+          <div class="note">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Use a secondary Roblox account. Requires Windows 10/11 64-bit.
+          </div>
+        </div>
+
+        <!-- Android steps -->
+        <div class="tab-panel" id="tab-android" role="tabpanel">
+          <ol class="steps android-steps">
+            <li class="step"><span class="step-num">1</span><div class="step-body"><strong>Download APK</strong> — Tap the Android button above to download the APK file.</div></li>
+            <li class="step"><span class="step-num">2</span><div class="step-body"><strong>Allow Unknown Sources</strong> — Go to Settings → Security → enable "Install unknown apps" for your browser.</div></li>
+            <li class="step"><span class="step-num">3</span><div class="step-body"><strong>Install</strong> — Open the downloaded APK and tap Install.</div></li>
+            <li class="step"><span class="step-num">4</span><div class="step-body"><strong>Open Delta</strong> — Launch the app and grant any requested permissions.</div></li>
+            <li class="step"><span class="step-num">5</span><div class="step-body"><strong>Open Roblox</strong> — Launch Roblox mobile and join a game.</div></li>
+            <li class="step"><span class="step-num">6</span><div class="step-body"><strong>Inject &amp; Execute</strong> — Switch to Delta, tap Inject, then paste and run your script.</div></li>
+          </ol>
+          <div class="note">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Requires Android 8.0+. Use a secondary Roblox account.
+          </div>
+        </div>
+
+        <!-- iOS steps -->
+        <div class="tab-panel" id="tab-ios" role="tabpanel">
+          <!-- eSign video -->
+        <div style="margin-bottom:1.25rem">
+          <p style="font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:0.75rem">📺 Install Guide — eSign by applejr</p>
+          <div style="position:relative;padding-bottom:56.25%;height:0;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);">
+            <iframe
+              src="https://www.youtube.com/embed/7oLjciKDe08"
+              title="eSign Install Guide by applejr"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
+              loading="lazy"
+            ></iframe>
+          </div>
+        </div>
+
+        <ol class="steps ios-steps">
+            <li class="step"><span class="step-num">1</span><div class="step-body"><strong>Watch the video</strong> — Follow applejr's eSign tutorial above to set up sideloading on your device.</div></li>
+            <li class="step"><span class="step-num">2</span><div class="step-body"><strong>Download IPA</strong> — Tap the iOS button above to get the <code>.ipa</code> file.</div></li>
+            <li class="step"><span class="step-num">3</span><div class="step-body"><strong>Install via eSign</strong> — Open eSign, import the IPA, and install Delta onto your device.</div></li>
+            <li class="step"><span class="step-num">4</span><div class="step-body"><strong>Trust Developer</strong> — Go to Settings → General → VPN &amp; Device Management → trust the Delta certificate.</div></li>
+            <li class="step"><span class="step-num">5</span><div class="step-body"><strong>Open Roblox</strong> — Launch Roblox and join a game.</div></li>
+            <li class="step"><span class="step-num">6</span><div class="step-body"><strong>Inject &amp; Execute</strong> — Switch to Delta, inject, and run your script.</div></li>
+          </ol>
+          <div class="note">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Requires iOS 14+. Sideloaded apps may need re-signing every 7 days on free Apple accounts.
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img src="https://ltnproject.github.io/velocity/velocity-logo.webp" alt="Velocity logo" width="26" height="26" loading="lazy">
+          <span>Velocity Executor</span>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="index.html">Home</a>
+          <a href="scripts.html">Script Hub</a>
+          <a href="delta.html">Delta</a>
+          <a href="index.html#faq">FAQ</a>
+        </nav>
+      </div>
+      <p class="disclaimer">⚠ Use at your own risk. Not responsible for account bans. For educational purposes only. &copy; 2026 Velocity Executor.</p>
+    </div>
+  </footer>
+
+  <script>
+    const BASE = 'https://ltnproject.github.io/velocity/';
+
+    // ─── Load delta.json ──────────────────────────────────────
+    async function loadDelta() {
+      try {
+        const res  = await fetch(BASE + 'delta.json?nocache=' + Date.now());
+        const data = await res.json();
+        renderCards(data);
+        renderInfo(data);
+        document.getElementById('heroVersion').innerHTML =
+          `<span>LATEST</span> ${data.version} · Updated ${data.updated}`;
+      } catch {
+        document.getElementById('platformCards').innerHTML =
+          `<p style="color:var(--danger);font-size:0.85rem;padding:1rem">Failed to load download links.</p>`;
+      }
+    }
+
+    function renderCards(d) {
+      const platforms = [
+        {
+          key:   'windows',
+          cls:   'windows',
+          label: 'Windows (BlueStacks)',
+          icon:  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>`,
+          data:  d.windows,
+        },
+        {
+          key:   'android',
+          cls:   'android',
+          label: 'Android',
+          icon:  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 16a7 7 0 0 1 14 0"/><line x1="12" y1="9" x2="12" y2="3"/><line x1="9" y1="5" x2="12" y2="3"/><line x1="15" y1="5" x2="12" y2="3"/><rect x="5" y="10" width="14" height="11" rx="2"/></svg>`,
+          data:  d.android,
+        },
+        {
+          key:   'ios',
+          cls:   'ios',
+          label: 'iOS / iPadOS',
+          icon:  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="3"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>`,
+          data:  d.ios,
+        },
+      ];
+
+      document.getElementById('platformCards').innerHTML = platforms.map(p => `
+        <div class="platform-card ${p.cls}">
+          <div class="platform-icon">${p.icon}</div>
+          <div class="platform-name">${p.label}</div>
+          <div class="platform-meta">
+            <span>${p.data.format}</span>
+            ${p.data.size ? `<span>${p.data.size}</span>` : ''}
+          </div>
+          <a href="${p.data.url}" target="_blank" rel="noopener noreferrer" class="btn-platform">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Download
+          </a>
+        </div>`).join('');
+    }
+
+    function renderInfo(d) {
+      document.getElementById('infoGrid').innerHTML = `
+        <div class="info-card">
+          <div class="info-card-title">Version</div>
+          <div class="info-card-value">${d.version}</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title">Last Updated</div>
+          <div class="info-card-value" style="font-size:0.85rem">${d.updated}</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title">Windows Size</div>
+          <div class="info-card-value">${d.windows.size || '—'}</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title">Platforms</div>
+          <div class="info-card-value">3</div>
+        </div>`;
+    }
+
+    // ─── Tabs ─────────────────────────────────────────────────
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected','true');
+        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    // ─── Init ─────────────────────────────────────────────────
+    loadDelta();
+  </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "version": "v0.8.4",
+  "updated": "March 14, 2026",
+  "windows": {
+    "label": "Windows (BlueStacks)",
+    "url": "https://github.com/ltnproject/velocity/releases/download/v0.8.4/BlueStacksInstaller_5.22.167.1006_native_22e5ed1fbdfd5a3530f05eebea9fd954_MDs1LDM7MTUsMTsxNSw0OzE1LDU7MTU.exe",
+    "size": "",
+    "format": ".exe"
+  },
+  "android": {
+    "label": "Android",
+    "url": "https://github.com/ltnproject/velocity/releases/download/v0.8.4/Delta-v2.711.1.apk",
+    "size": "",
+    "format": ".apk"
+  },
+  "ios": {
+    "label": "iOS / iPadOS",
+    "url": "https://github.com/ltnproject/velocity/releases/download/v0.8.4/DeltaiOS-2.705.ipa",
+    "size": "",
+    "format": ".ipa"
+  }
+}
