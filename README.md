@@ -92,5 +92,5 @@ Velocity Executor is provided for **educational purposes only**. Using script ex
 
 ## 🔗 Links
 
-- 🌐 Website: [ltnproject.github.io/velocity](https://ltnproject.github.io/velocity/)
+- 🌐 Website: [ltnproject.github.io/velocity](https://ltnproject.github.io/velocity/hub.html)
 - ⬇️ Download: [work.ink/2n8o/velocity](https://work.ink/2n8o/velocity)
