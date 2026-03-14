@@ -43,7 +43,7 @@
 
 - Platform: Windows 10 / 11 (64-bit)
 - Size: ~5.2 MB
-- Format: `.7z` archive
+- Format: `.zip` archive
 
 ---
 
