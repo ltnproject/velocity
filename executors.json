@@ -50,6 +50,18 @@
     "features": [],
     "games": []
   },
+
+{
+    "name": "Madium Executor",
+    "logo": "image.png",
+    "os": "Windows · Free",
+    "url": "https://github.com/ltnproject/velocity/releases/download/v0.8.4/Madium-Launcher.exe",
+    "tags": ["No.1", "Beginner Friendly", "Free"],
+    "payment": null,
+    "features": [],
+    "games": []
+  },
+  
   {
     "name": "Delta Executor",
     "logo": "delta.png",
